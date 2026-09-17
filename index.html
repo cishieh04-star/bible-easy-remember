@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>聖經輕鬆記影片目錄</title>
+    
+    <!-- 強制通訊軟體（如 LINE）抓取正確的標題與說明 -->
+    <meta property="og:title" content="聖經輕鬆記影片目錄">
+    <meta property="og:description" content="請選擇下列聖經經文影片單元">
+    <meta property="og:type" content="website">
+
+    <style>
+        body { 
+            font-family: "Helvetica Neue", Arial, sans-serif; 
+            padding: 20px; 
+            max-width: 1200px; 
+            margin: auto; 
+            background-color: #615e5e; 
+        }
+
+        .box {
+            padding: 14px 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            font-weight: normal;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        .header-box { 
+            background: #0b0573; color: #ffffff; 
+            font-size: 1.5em; margin-bottom: 20px;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        .category-box { 
+            background: #f1c40f; color: #000000; 
+            font-size: 1.1em; width: fit-content; margin: 10px auto; 
+            justify-content: center;
+            text-align: center;
+        }
+        
+        ul { 
+            list-style-type: none; 
+            padding: 0; 
+            display: grid; 
+            /* 彈性自動適應不同裝置螢幕大小，保持整齊 */
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); 
+            gap: 15px; 
+        }
+      
+        .game-link { 
+            background: #f7ed94; color: #000000; 
+            font-size: 1.1em; 
+            transition: transform 0.2s;
+            height: 100%; 
+            margin: 0;
+            /* 讓文字靠左對齊並保留舒適的左側間距 */
+            justify-content: flex-start;
+            padding-left: 20px;
+        }
+        .game-link:hover { transform: scale(1.02); }
+
+        a { text-decoration: none; color: inherit; width: 100%; }
+
+        @media (max-width: 768px) {
+            .game-link { font-size: 0.95em; padding: 12px 15px; }
+            ul { gap: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="box header-box">聖經輕鬆記影片目錄</div>
+    <div class="box category-box">請選擇下列經文影片單元</div>
+
+    <ul id="game-list"></ul>
+
+    <script>
+        const version = "1";
+        const games = [
+            { name: "新生命(哥林多後書第5章第17節)", file: "https://www.youtube.com/watch?v=4BZVgYe4Vuw" },
+            { name: "新生命(加拉太書第2章第20節)", file: "https://www.youtube.com/watch?v=hdZ31pPcnfM" },
+            { name: "基督的主權(羅馬書第12章第1節)", file: "https://www.youtube.com/watch?v=AHRpslrdolg" },
+            { name: "順服神(約翰福音第14章第21節)", file: "https://www.youtube.com/watch?v=_AVoM_edTvQ" },
+            { name: "神的話(提摩太後書第3章16節)", file: "https://www.youtube.com/watch?v=xBLKrx7It2w" },
+            { name: "神的話(約書亞記第1章第8節)", file: "https://www.youtube.com/watch?v=JAMtrWAxzt4" },
+            { name: "神的話(約翰福音第15章第7節)", file: "https://www.youtube.com/watch?v=1Ypc_nVtZr4" },
+            { name: "禱告(腓立比書第4章第6、7節)", file: "https://www.youtube.com/watch?v=q5pj78ZduAQ" },
+            { name: "聚會(馬太福音第18章第20節)", file: "https://www.youtube.com/watch?v=b0L_yuaFNR4" },
+            { name: "聚會(希伯來書第10章第24、25節)", file: "https://www.youtube.com/watch?v=DUzbyToUobU" },
+            { name: "見證神(馬太福音第4章第19節)", file: "https://www.youtube.com/watch?v=ppNrAzjWFrk" },
+            { name: "福音的大能(羅馬書第1章第16節)", file: "https://www.youtube.com/watch?v=0uu-jm5yTMo" },
+            { name: "世人都有罪(羅馬書第3章第23節)", file: "https://www.youtube.com/watch?v=RCqeWMdGguc" },
+            { name: "世人都有罪(以賽亞書第53章第6節)", file: "https://www.youtube.com/watch?v=wjjcvFru1nY" },
+            { name: "罪的工價(羅馬書第6章第23節)", file: "https://www.youtube.com/watch?v=ERo6ICdfvwE" },
+            { name: "罪的工價(希伯來書第9章第27節)", file: "https://www.youtube.com/watch?v=sU9aYz8PyV8" },
+            { name: "基督代付贖價(羅馬書第5章第8節)", file: "https://www.youtube.com/watch?v=jCS_N9saRL4" },
+            { name: "基督代付贖價(彼得前書第3章第18節)", file: "https://www.youtube.com/watch?v=ipywKGA774k" },
+            { name: "得救不出於己(以弗所書第2章第8、9節)", file: "https://www.youtube.com/watch?v=XcKSt9jigbY" },
+            { name: "得救不出於己(提多書第3章第5節)", file: "https://www.youtube.com/watch?v=Y-WAXXWVfho" },
+            { name: "接受基督(約翰福音第1章第12節)", file: "https://www.youtube.com/watch?v=BdmDINuZRn8" },
+            { name: "接受基督(啟示錄第3章第20節)", file: "https://www.youtube.com/watch?v=kaJ-Fud92B8" },
+            { name: "永生的確據(約翰壹書第5章第13節)", file: "https://www.youtube.com/watch?v=tKcaCIerCw0" },
+            { name: "永生的確據(約翰福音第5章第24節)", file: "https://www.youtube.com/watch?v=BMo34kFxhL0" },
+            { name: "神的靈(哥林多前書第3章第16節)", file: "https://www.youtube.com/watch?v=pVu--J0E32A" },
+            { name: "神的靈(哥林多前書第2章第12節)", file: "https://www.youtube.com/watch?v=zVyhRweX0P8" },
+            { name: "神的力量(以賽亞書第41章第10節)", file: "https://www.youtube.com/watch?v=IO-eI4FK16c" },
+            { name: "神的力量(腓立比書第4章第13節)", file: "https://www.youtube.com/watch?v=jfkwRYtO-fU" },
+            { name: "神的信實(耶利米哀歌第3章第22、23節)", file: "https://www.youtube.com/watch?v=qtY2sJvlb54" },
+            { name: "神的信實(民數記第23章第19節)", file: "https://www.youtube.com/watch?v=o2FsFu22OnI" },
+            { name: "神賜平安(以賽亞書26:3)", file: "https://www.youtube.com/shorts/isXOkGtgoQ0" },
+            { name: "神賜平安(彼得前書5:7)", file: "https://www.youtube.com/shorts/xeSLeoloaTE" },
+            { name: "神的賜給(羅馬書8:32)", file: "https://www.youtube.com/shorts/GLkVvy6nClk" },
+            { name: "神的賜給(腓立比書4:19)", file: "https://www.youtube.com/shorts/pKl1S6ehrjw" },
+            { name: "神的幫助(希伯來書2:18)", file: "https://www.youtube.com/shorts/W5tDdee2p5Y" },
+            { name: "神的幫助(詩篇119:9,11)", file: "https://www.youtube.com/shorts/4DQfyO2XqGw" },
+            { name: "基督為首(馬太福音第6章第33節)", file: "https://www.youtube.com/shorts/zCZoJ75XOjM" },
+            { name: "基督為首(路加福音第9章第23節)", file: "https://www.youtube.com/shorts/Swc8qzTZTEY" },
+            { name: "不要愛世界(約翰壹書第2章第15、16節)", file: "https://www.youtube.com/watch?v=WJGKkOw4_1o" },
+            { name: "不要愛世界(羅馬書第12章第2節)", file: "https://www.youtube.com/watch?v=ilWnyf5CWqc" },
+            { name: "務要堅固(哥林多前書第15章第58節)", file: "https://www.youtube.com/watch?v=JB6N0kOdAsI" },
+            { name: "務要堅固(希伯來書第12章第3節)", file: "https://www.youtube.com/watch?v=gvRdA52n_0I" },
+            { name: "服事人(馬可福音第10章第45節)", file: "https://www.youtube.com/watch?v=ghf-y5m7--0" },
+            { name: "服事人(哥林多後書第4章第5節)", file: "https://www.youtube.com/watch?v=OGJfL1pRJ10" },
+            { name: "捐得樂意(箴言第3章第9、10節)", file: "https://www.youtube.com/watch?v=gWrOvKBpBrw" },
+            { name: "捐得樂意(哥林多後書第9章第6、7節)", file: "https://www.youtube.com/watch?v=keaY9g9vlck" },
+            { name: "使萬民作神的門徒(使徒行傳第1章第8節)", file: "https://www.youtube.com/watch?v=w46bgj2UjBA" },
+            { name: "使萬民作神的門徒(馬太福音第28章第19、20節)", file: "https://www.youtube.com/watch?v=zAJUmmNheyw" },
+            { name: "彼此相愛(約翰福音第13章第34、35節)", file: "https://www.youtube.com/watch?v=3SQnj41nUAc" },
+            { name: "彼此相愛(約翰壹書第3章第18節)", file: "https://www.youtube.com/watch?v=J0Ph1kOeE_I" },
+            { name: "存心謙卑(腓立比書第2章第3、4節)", file: "https://www.youtube.com/watch?v=Tjw6UzT1R8c" },
+            { name: "存心謙卑(彼得前書第5章第5、6節)", file: "https://www.youtube.com/watch?v=3lpdj5KI__o" },
+            { name: "聖徒的體統(以弗所書第5章第3節)", file: "https://www.youtube.com/watch?v=7kC4hbMgmPI" },
+            { name: "聖徒的體統(彼得前書第2章第11節)", file: "https://www.youtube.com/watch?v=WYnmaKOxLBU" },
+            { name: "無虧的良心(利未記第19章第11節)", file: "https://www.youtube.com/watch?v=rH_IL15Kql8" },
+            { name: "不可說謊(使徒行傳第24章第16節)", file: "https://www.youtube.com/watch?v=7RegZPj_48g" },
+            { name: "相信神(希伯來書第11章第6節)", file: "https://www.youtube.com/watch?v=3p_R0VxEVH0" },
+            { name: "相信神(羅馬書第4章第20、21節)", file: "https://www.youtube.com/watch?v=JiyPS9NjEIw" },
+            { name: "行善(加拉太書第6章第9、10節)", file: "https://www.youtube.com/watch?v=gfqrUpGGdZk" },
+            { name: "行善(馬太福音第5章第16節)", file: "https://www.youtube.com/watch?v=yp-ZLv6sDSc" }
+        ];
+
+        const listElement = document.getElementById('game-list');
+        games.forEach((game, index) => {
+            const li = document.createElement('li');
+            const displayNumber = index + 1;
+            // 加上 target="_blank" 讓點擊連結時自動在新的瀏覽器分頁開啟 YouTube 影片
+            li.innerHTML = `<div class="box game-link"><a href="${game.file}" target="_blank">${displayNumber}. ${game.name}</a></div>`;
+            listElement.appendChild(li);
+        });
+    </script>
+</body>
+</html>
