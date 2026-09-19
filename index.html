@@ -81,8 +81,9 @@
     <ul id="game-list"></ul>
 
     <script>
-        const version = "5"; // 更新版本號避免快取
+        const version = "6"; // 更新版本號避免快取
         const games = [
+            /* 原有的經文影片清單 */
             { name: "新生命(哥林多後書第5章第17節)", file: "https://www.youtube.com/shorts/4BZVgYe4Vuw" },
             { name: "新生命(加拉太書第2章第20節)", file: "https://www.youtube.com/shorts/hdZ31pPcnfM" },
             { name: "基督的主權(羅馬書第12章第1節)", file: "https://www.youtube.com/shorts/AHRpslrdolg" },
@@ -142,7 +143,51 @@
             { name: "相信神(希伯來書第11章第6節)", file: "https://www.youtube.com/shorts/3p_R0VxEVH0" },
             { name: "相信神(羅馬書第4章第20、21節)", file: "https://www.youtube.com/shorts/JiyPS9NjEIw" },
             { name: "行善(加拉太書第6章第9、10節)", file: "https://www.youtube.com/shorts/gfqrUpGGdZk" },
-            { name: "行善(馬太福音第5章第16節)", file: "https://www.youtube.com/shorts/yp-ZLv6sDSc" }
+            { name: "行善(馬太福音第5章第16節)", file: "https://www.youtube.com/shorts/yp-ZLv6sDSc" },
+
+            /* 接續新增的 42 筆「標竿人生」系列影片 */
+            { name: "萬物皆由神開始(標竿人生第1天)", file: "https://www.youtube.com/shorts/5uMx6DYnZjc" },
+            { name: "你的存在絕非偶然(標竿人生第2天)", file: "https://www.youtube.com/shorts/WhqpS7PZv-Q" },
+            { name: "什麼在主導你的人生？(標竿人生第3天)", file: "https://www.youtube.com/shorts/2TROO2sDFts" },
+            { name: "為永恆而被造(標竿人生第4天)", file: "https://www.youtube.com/shorts/vf2D4m3ErEc" },
+            { name: "從神的觀點看人生(標竿人生第5天)", file: "https://www.youtube.com/shorts/UaZIvrxHoes" },
+            { name: "人生是一項暫時性的任務(標竿人生第6天)", file: "https://www.youtube.com/shorts/N1v2kgtrEQE" },
+            { name: "所有一切的緣由(標竿人生第7天)", file: "https://www.youtube.com/shorts/Treh-F0gPMs" },
+            { name: "被造是為討神喜悅(標竿人生第8天)", file: "https://www.youtube.com/shorts/ytlTjFyE_2k" },
+            { name: "什麼事令神歡喜？(標竿人生第9天)", file: "https://www.youtube.com/shorts/RNMX9K0p_uc" },
+            { name: "敬拜的中心(標竿人生第10天)", file: "https://www.youtube.com/shorts/3j2ktpPwGGw" },
+            { name: "成為神的摯友(標竿人生第11天)", file: "https://www.youtube.com/shorts/hHyJtZiYRoU" },
+            { name: "與神建立深厚的友誼(標竿人生第12天)", file: "https://www.youtube.com/shorts/_OMFDyMXYd8" },
+            { name: "討神喜悅的敬拜(標竿人生第13天)", file: "https://www.youtube.com/shorts/NJ_Df3ari1I" },
+            { name: "當神似乎遠離(標竿人生第14天)", file: "https://www.youtube.com/shorts/DqX0BpyGQ7k" },
+            { name: "我是為神的家而造(標竿人生第15天)", file: "https://www.youtube.com/shorts/sG3vZ80dBL4" },
+            { name: "最重要的事(標竿人生第16天)", file: "https://www.youtube.com/shorts/Lce5hfgmpaU" },
+            { name: "有所歸屬(標竿人生第17天)", file: "https://www.youtube.com/shorts/yHnwdfxzGb4" },
+            { name: "一起經歷生命(標竿人生第18天)", file: "https://www.youtube.com/shorts/x5hqpVejC6Y" },
+            { name: "耕耘群體生活(標竿人生第19天)", file: "https://www.youtube.com/shorts/5o1nZK8wJBA" },
+            { name: "重建破裂的團契生活(標竿人生第20天)", file: "https://www.youtube.com/shorts/xk6g1soFQJE" },
+            { name: "維護你的教會(標竿人生第21天)", file: "https://www.youtube.com/shorts/3kwd2L8Nn9s" },
+            { name: "被造是為了像基督(標竿人生第22天)", file: "https://www.youtube.com/shorts/M5w9NKGuBy8" },
+            { name: "如何成長？(標竿人生第23天)", file: "https://www.youtube.com/shorts/M5w9NKGuBy8" },
+            { name: "真理使我們蛻變(標竿人生第24天)", file: "https://www.youtube.com/shorts/rzQjderrh5o" },
+            { name: "苦難使我們蛻變(標竿人生第25天)", file: "https://www.youtube.com/shorts/k_wwDmskeBQ" },
+            { name: "在試探中成長(標竿人生第26天)", file: "https://www.youtube.com/shorts/4oWK65bSaW4" },
+            { name: "戰勝試探(標竿人生第27天)", file: "https://www.youtube.com/shorts/fJPY_idzPUE" },
+            { name: "成長需要時間(標竿人生第28天)", file: "https://www.youtube.com/shorts/uLiKH9E3wv4" },
+            { name: "接受你的使命(標竿人生第29天)", file: "https://www.youtube.com/shorts/HdfxzjkMaaE" },
+            { name: "被塑造是為服事神(標竿人生第30天)", file: "https://www.youtube.com/shorts/-80TOYKFpes" },
+            { name: "了解你的特色(標竿人生第31天)", file: "https://www.youtube.com/shorts/FcU5QAZKAyg" },
+            { name: "使用神給你的一切(標竿人生第32天)", file: "https://www.youtube.com/shorts/hpKD9G7NUJY" },
+            { name: "真僕人的行為(標竿人生第33天)", file: "https://www.youtube.com/shorts/B9Qf-9CM190" },
+            { name: "僕人的思維(標竿人生第34天)", file: "https://www.youtube.com/shorts/1E63VzkeseM" },
+            { name: "神的大能彰顯在你的軟弱上(標竿人生第35天)", file: "https://www.youtube.com/shorts/zt-Y7DIobS4" },
+            { name: "為使命而被造(標竿人生第36天)", file: "https://www.youtube.com/shorts/v4xa3916fRo" },
+            { name: "分享你的人生信息(標竿人生第37天)", file: "https://www.youtube.com/shorts/wRJsHHjXWdU" },
+            { name: "作個世界級的基督徒(標竿人生第38天)", file: "https://www.youtube.com/shorts/oxP1h4mvMkc" },
+            { name: "平衡你的生命(標竿人生第39天)", file: "https://www.youtube.com/shorts/f8QLZY_l-hE" },
+            { name: "目的導向的人生(標竿人生第40天)", file: "https://www.youtube.com/shorts/sxHT6vm4Rpo" },
+            { name: "嫉妒的陷阱(標竿人生第41天)", file: "https://www.youtube.com/shorts/9fLUe_YYdTQ" },
+            { name: "討好人的陷阱(標竿人生第42天)", file: "https://www.youtube.com/shorts/p2vv0aQsl8c" }
         ];
 
         const listElement = document.getElementById('game-list');
@@ -155,3 +200,5 @@
     </script>
 </body>
 </html>
+
+```
